@@ -220,19 +220,8 @@ export function cmyk2Rgb({c, m, y, k}: ColorCMYK): ColorRGB {
   };
 }
 
-export function hsv2Hsl({h, s, v}: ColorHSV): ColorHSL {
-  const l = (2 - s) * v / 2;
-  if (l !== 0) {
-    if (l === SV_MAX) {
-      s = 0;
-    } else if (l < SV_MAX / 2) {
-      s = s * v / (l * 2);
-    } else {
-      s = s * v / (2 - l * 2);
-    }
-  }
-
-  return {h, s, l};
+export function hsv2Hsl(color: ColorHSV): ColorHSL {
+  return rgb2Hsl(hsv2Rgb(color));
 }
 
 export function hsl2Hsv(color: ColorHSL): ColorHSV {
